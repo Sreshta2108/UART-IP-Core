@@ -8,7 +8,6 @@ top-level integration.
 The primary simulation flow uses QuestaSim. The Verilog testbenches are also
 compatible with Icarus Verilog, while the synthesizable RTL has been checked
 with Verilator lint.
-
 ## Verification Scope
 
 The verified UART configuration is intentionally focused:
@@ -131,7 +130,8 @@ make test
 
 Successful execution produces a PASS result for every self-checking testbench:
 
-![All UART self-checking tests passed](images/all_test_pass.png)
+<img width="541" height="74" alt="all_test_pass" src="https://github.com/user-attachments/assets/c5305bff-04f4-4f8c-b47a-b323a79ad9f9" />
+
 
 All four testbenches complete without assertion failures or watchdog timeouts.
 The Makefile stops immediately and returns a non-zero exit code if any test
@@ -181,7 +181,8 @@ databases. Generated simulation files are excluded by `.gitignore`.
 
 ### 1. Baud-generator timing
 
-![Baud generator waveform](images/baud_gen_waveform.png)
+<img width="1860" height="238" alt="baud_gen_waveform" src="https://github.com/user-attachments/assets/ee79e15b-dc54-44ba-83ee-56168801060e" />
+
 
 The baud-generator test covers four behaviors in one directed sequence:
 
@@ -196,7 +197,8 @@ This verifies both the divider interval and deterministic restart behavior.
 
 ### 2. Top-level loopback overview
 
-![UART top-level loopback overview](images/uart_loopback_overview.png)
+<img width="1895" height="695" alt="uart_loopback_overview" src="https://github.com/user-attachments/assets/6f7cd98e-56a5-470b-87b8-f4b22e491369" />
+
 
 The overview contains four clean register-driven loopback frames:
 
@@ -229,7 +231,8 @@ input passes through a two-flop synchronizer before start-bit detection.
 
 ### 3. Detailed `0xA5` frame
 
-![UART 0xA5 frame detail](images/uart_a5_frame_detail.png)
+<img width="1895" height="695" alt="uart_a5_frame_detail" src="https://github.com/user-attachments/assets/2967cc9a-178c-44b1-aae7-68fd31cec8e8" />
+
 
 `0xA5` is `1010_0101` in binary. UART transmits the least-significant bit
 first, so the serial data order is:
@@ -257,7 +260,8 @@ the RX-data register is read.
 
 ### 4. Busy-write protection
 
-![UART busy-write protection](images/uart_busy_write_protection.png)
+<img width="1892" height="684" alt="uart_busy_write_protection" src="https://github.com/user-attachments/assets/b56b484c-b98c-4a6f-bbad-3ba46f35ea4f" />
+
 
 This directed test starts a valid `0x3C` transmission and then attempts to
 write `0xC3` while `tx_busy=1`.
@@ -274,7 +278,8 @@ This confirms that software cannot overwrite an in-progress TX frame.
 
 ### 5. RX frame-error detection
 
-![UART RX frame-error waveform](images/uart_rx_frame_error.png)
+<img width="1893" height="373" alt="uart_rx_frame_error" src="https://github.com/user-attachments/assets/19d7329e-6880-4e79-aae2-f4206fd3df57" />
+
 
 The RX negative test drives `0x3C` with a LOW stop bit. The receiver still
 samples all eight data bits, but the stop-bit check fails. Consequently:
